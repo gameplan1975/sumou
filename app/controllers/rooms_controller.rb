@@ -1,52 +1,46 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
 
-  # GET /rooms
   def index
     @rooms = Room.all
   end
 
-  # GET /rooms/1
   def show
   end
 
-  # GET /rooms/new
   def new
     @room = Room.new
+    2.times{@room.stations.build}
   end
 
-  # GET /rooms/1/edit
   def edit
+    @room.stations.build
   end
 
-  # POST /rooms
   def create
     @room = Room.new(room_params)
 
     if @room.save
-      redirect_to @room, notice: 'Room was successfully created.'
+      redirect_to @room, notice: '物件情報が登録されました'
     else
       render :new
     end
   end
 
-  # PATCH/PUT /rooms/1
   def update
     if @room.update(room_params)
-      redirect_to @room, notice: 'Room was successfully updated.'
+      redirect_to @room, notice: '物件情報が更新されました'
     else
       render :edit
     end
   end
 
-  # DELETE /rooms/1
   def destroy
     @room.destroy
     redirect_to rooms_url, notice: 'Room was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_room
       @room = Room.find(params[:id])
     end
