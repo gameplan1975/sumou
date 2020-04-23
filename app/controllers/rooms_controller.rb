@@ -42,12 +42,12 @@ class RoomsController < ApplicationController
   end
 
   private
-    def set_room
-      @room = Room.find(params[:id])
-    end
+  def set_room
+    @room = Room.find(params[:id])
+  end
 
-    def room_params
-      params.require(:room).permit(:name, :rent, :address, :age, :comment,
-      stations_attributes: [:line_name, :station_name, :walk_time])
-    end
+  def room_params
+    params.require(:room).permit(:name, :rent, :address, :age, :comment,
+    stations_attributes: [:line_name, :station_name, :walk_time, :id])
+  end
 end
