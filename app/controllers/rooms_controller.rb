@@ -6,6 +6,7 @@ class RoomsController < ApplicationController
   end
 
   def show
+    @stations = Station.all
   end
 
   def new
@@ -37,7 +38,7 @@ class RoomsController < ApplicationController
 
   def destroy
     @room.destroy
-    redirect_to rooms_url, notice: 'Room was successfully destroyed.'
+    redirect_to rooms_url, notice: '物件情報を削除しました'
   end
 
   private
@@ -45,8 +46,8 @@ class RoomsController < ApplicationController
       @room = Room.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def room_params
-      params.require(:room).permit(:name, :rent, :address, :age, :comment)
+      params.require(:room).permit(:name, :rent, :address, :age, :comment,
+      stations_attributes: [:line_name, :station_name, :walk_time])
     end
 end
