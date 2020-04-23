@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h3>最寄り駅</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>路線名</th>
+      <th>駅名</th>
+      <th>徒歩分数</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stations.each do |station| %>
+      <tr>
+        <td><%= station.line_name %></td>
+        <td><%= station.station_name %></td>
+        <td><%= station.walk_time %></td>
+        <td><%= link_to '詳細', station %></td>
+        <td><%= link_to '編集', edit_station_path(station) %></td>
+        <td><%= link_to '削除', station, method: :delete, data: { confirm: '削除してもよろしいですか？' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '駅登録', new_station_path %>
